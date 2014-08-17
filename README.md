@@ -2,7 +2,11 @@ henk52-repo
 ===========
 
 Repo conf administration
-repo
+
+This module will disable the default fedora repositories and add the three mirror repositories.
+ - Base
+ - Upgrade
+ - Everything
 
 This is the repo module.
 
