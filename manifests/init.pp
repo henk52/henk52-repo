@@ -46,14 +46,7 @@ file { 'repo_base':
   require => [ 
               Augeas [ 'repo_fedora' ],
               Augeas [ 'repo_fedora_updates' ],
-              File [ 'distribution_manager_extras' ],
                     ],
-}
-
-file { 'distribution_manager_base':
-  path    => '/etc/yum.repos.d/distribution-manager.repo',
-  ensure  => file,
-  content => template('repo/distribution_manager_repo.erb'),
 }
 
 file { 'distribution_manager_upgrade':

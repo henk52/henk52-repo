@@ -10,6 +10,10 @@ This module will disable the default fedora repositories and add the three mirro
 
 This is the repo module.
 
+
+Installation:
+sudo puppet apply /etc/puppet/modules/repo/tests/init.pp
+
 License
 -------
 
