@@ -39,42 +39,36 @@ class repo(
  $szRepoWebHostAddress = hiera( 'RepoWebHostAddress' ),
 ) {
 
-file { 'repo_base':
-  path    => '/etc/yum.repos.d/distribution-manager.repo',
-  ensure  => file,
-  content => template('repo/distribution_manager_repo.erb'),
-  require => [ 
-              Augeas [ 'repo_fedora' ],
-              Augeas [ 'repo_fedora_updates' ],
-                    ],
-}
+$arReposList = hiera('repos')
 
-file { 'distribution_manager_upgrade':
-  path    => '/etc/yum.repos.d/distribution-manager-upgrade.repo',
-  ensure  => file,
-  content => template('repo/distribution_manager_upgrade_repo.erb'),
-}
-
-file { 'distribution_manager_everything':
-  path    => '/etc/yum.repos.d/distribution-manager-everything.repo',
-  ensure  => file,
-  content => template('repo/distribution_manager_everything_repo.erb'),
-}
-
-augeas { 'repo_fedora':
- context => '/files/etc/yum.repos.d/fedora.repo',
-  changes => [
-    'set fedora/enabled 0',
-  ],
-}
-augeas { 'repo_fedora_updates':
- context => '/files/etc/yum.repos.d/fedora-updates.repo',
-  changes => [
-    'set updates/enabled 0',
-    'set updates-source/enabled 0',
-  ],
+file { '/etc/yum.repos.d/local.repo':
+   ensure  => file,
+   content => template('repo/combined_repo.erb'),
 }
 
 
+file { '/etc/yum.repos.d/fedora.repo':
+  ensure  => absent,
+}
+
+file { '/etc/yum.repos.d/fedora-updates.repo':
+  ensure  => absent,
+}
+
+file { '/etc/yum.repos.d/CentOS-Base.repo':
+  ensure  => absent,
+}
+
+file { '/etc/yum.repos.d/CentOS-Debuginfo.repo':
+  ensure  => absent,
+}
+
+file { '/etc/yum.repos.d/CentOS-Media.repo':
+  ensure  => absent,
+}
+
+file { '/etc/yum.repos.d/CentOS-Vault.repo':
+  ensure  => absent,
+}
 
 }
