@@ -1,0 +1,13 @@
+# combine REPO list
+#
+#
+
+<% @arReposList.each do |repo| %>
+[<%= repo['name'] %>]
+name=<%= repo['name'] %>
+baseurl=<%= repo['baseurl'] %>
+gpgcheck=<%= repo['gpgcheck'] %>
+gpgkey=<%= repo['gpgkey'] %>
+
+<% end %>
+
